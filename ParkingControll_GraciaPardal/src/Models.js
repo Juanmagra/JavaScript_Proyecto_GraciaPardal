@@ -26,9 +26,9 @@ export class Plaza{
     }   
 }
 export class Parking{
-    constructor(Plaza, clientes){
-        this.Plaza = Plaza;
-        this.clientes = clientes;
+    constructor(listaPlazas, listaclientes){
+        this.listaPlazas = listaPlazas;
+        this.listaclientes = listaclientes;
     }
 }
 export class Ticket{

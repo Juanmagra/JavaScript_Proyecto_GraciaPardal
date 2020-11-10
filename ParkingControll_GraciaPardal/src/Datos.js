@@ -38,12 +38,10 @@ export class bbdd {
 
     }
 
-    getListaClientes(){return this.listaCliente};
-
 }
 
 
-export var bd = new bbdd(listaClientes,listaTipos,listaPLazas,parking);
+export var bd = new bbdd(listaClientes,listaTipos,listaPLazas,parking, idGenerator);
 
 
 
