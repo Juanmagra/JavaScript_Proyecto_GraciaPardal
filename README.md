@@ -1,2 +1,2 @@
-# TypeScript_Proyecto
-Primer proyecto de TypeScript
+# JavaScript_Proyecto
+Primer proyecto de JavaScript
