@@ -12,9 +12,9 @@ export class Tipo{
     }
 }
 export class Vehiculo{
-    constructor(matricula, Tipo) {
+    constructor(matricula, tipo) {
         this.matricula = matricula;
-        this.Tipo = Tipo;
+        this.tipo = tipo;
       }
 }
 
