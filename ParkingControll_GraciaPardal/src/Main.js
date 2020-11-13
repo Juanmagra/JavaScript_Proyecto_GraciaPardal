@@ -4,13 +4,14 @@ import moment from 'moment';
 import rl  from 'readline-sync';
 import * as user from  './User.js';
 import * as parking from  './Parking.js';
+import * as admin from  './Admin.js';
 
 var ejecucion=true;
 
 while(true){
 
-    var admin = rl.question("Bienvenido a DamParking!. ¿Es usted usuario o administrador?\n1. Usuario\n2. Administrador\n");
-    switch (admin) {
+    var quien = rl.question("\nBienvenido a DamParking!. ¿Es usted usuario o administrador?\n1. Usuario\n2. Administrador\n");
+    switch (quien) {
         //Usuario
         case "1":
             var opcion = rl.question("¿Que desea hacer?\n1. Registrarse\n2. Depositar sinendo cliente\n3. Retirar siendo clinte\n4. Depositar sin ser cliente\n5. Retirar sin ser cliente\n ");
@@ -72,7 +73,43 @@ while(true){
             break;
         //Admin
         case "2":
+            var adminOption = rl.question("¿Que desea hacer?\n1. Registrarse\n2. Listar plazas\n3. Revisar cobros\n4. Revisar clientes\n");
 
+            switch(adminOption){
+                case"1":
+                var nuevoCliente = parking.crearCliente(bd);
+                        if(nuevoCliente==undefined){
+                        console.log("Lo sentimos pero no puede registrarse con ese tipo de plaza.");
+                        }else{
+                        console.log("Felicidades! Ya es usted usuario de este parking.");
+                        console.log(nuevoCliente);
+                        }
+                        break;
+                case"2":
+                admin.listarPlazas(bd);
+                break;
+                
+                case"3":
+                console.log("El total de cobros actual es de: ")
+                if(admin.totalCobros(bd)==undefined){
+                    console.log("No hay cobros.")
+                }else{
+                    console.log(admin.totalCobros(bd));
+                }
+                
+                break;
+
+                case"4":
+                if(admin.listaAbonados(bd).length<1){
+                    console.log("No hay clientes registrados.")
+                }else{
+                    console.table(admin.listaAbonados(bd));
+                }
+                break;
+            default:
+                console.log("Opcion no valida.");
+            break;
+            }
 
             break;
 
