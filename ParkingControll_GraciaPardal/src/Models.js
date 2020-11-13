@@ -6,9 +6,11 @@ export const TIPO = Object.freeze({
 });
 
 export class Tipo{
-    constructor(nombre, cantida){
+    constructor(nombre, cantidaDisponible, cantidadReservada, cantidadUsada){
         this.nombre = nombre;
-        this.cantida = cantida;
+        this.cantidaDisponible = cantidaDisponible;
+        this.cantidadReservada = cantidadReservada;
+        this.cantidadUsada = cantidadUsada;
     }
 }
 export class Vehiculo{
@@ -19,10 +21,11 @@ export class Vehiculo{
 }
 
 export class Plaza{
-    constructor(id, tipo, estado){
+    constructor(id, tipo, estado, reservada){
         this.id=id;
         this.tipo = tipo;
         this.estado = estado;
+        this.reservada = reservada;
     }   
 }
 export class Parking{
@@ -32,22 +35,27 @@ export class Parking{
     }
 }
 export class Ticket{
-    constructor(id,matricula, entrada, salida, pin, plazaId){
+    constructor(id,matricula, entrada, salida, pin, plazaId,precioFinal,cliente){
         this.id = id;
         this.matricula=matricula;
         this.entrada = entrada;
         this.salida = salida;
         this.pin = pin;
         this.plazaId = plazaId;
+        this.precioFinal=precioFinal;
+        this.cliente = cliente;
+
     }
 }
 export class Cliente{
-    constructor(nombre, dni, abonoPin, vehiculo, plazaId){
+    constructor(nombre, dni, abonoPin, vehiculo, plazaId,fechaAlta, fechaExpiracion){
         this.nombre = nombre;
         this.dni = dni;
         this.abonoPin = abonoPin;
         this.vehiculo = vehiculo;
         this.plazaId = plazaId;
+        this.fechaAlta = fechaAlta;
+        this.fechaExpiracion = fechaExpiracion;
     }
 }
 

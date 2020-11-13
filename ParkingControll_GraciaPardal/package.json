@@ -9,5 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "14": "^3.1.6",
+    "moment": "^2.29.1",
+    "readline-sync": "^1.4.10",
+    "requirejs": "^2.3.6"
+  }
 }

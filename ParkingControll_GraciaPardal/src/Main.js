@@ -1,51 +1,56 @@
 import { bd } from "./Datos.js";
 import { Vehiculo, TIPO, Cliente, Tipo, Plaza,Ticket, Parking, } from "./Models.js";
+import moment from 'moment';
+import rl  from 'readline-sync';
+import * as user from  './User.js';
+import * as parking from  './Parking.js';
 
-
-
-
-var MotoM = new Vehiculo("0002",TIPO.MOTO);
-var cliente = new Cliente("Paco",654654,5649,MotoM,4);
-bd.listaClientes.push(cliente);
-
-var nuevoCliente=[
-    "Matricula de tu auto: ",
-    "Nombre del usuario: ",
-    "DNI del usuario: ",
-    ];
-
-var datosNuevoCliente=[];
-
-function preguntar(i){
-    process.stdout.write(nuevoCliente[i]);
+//bucle para probar funcionalidades
+while(false){
 }
-
-process.stdin.on('data', function(data){
-    datosNuevoCliente.push(data.toString());
-    if(datosNuevoCliente.length < nuevoCliente.length){
-        preguntar(datosNuevoCliente.length);  
+  
+//Registrar un nuevo cliente
+    var nuevoCliente = parking.crearCliente(bd);
+    if(nuevoCliente==undefined){
+    console.log("Lo sentimos pero no puede registrarse con ese tipo de plaza.")
     }else{
-        process.exit();
+    console.log("Felicidades! Ya es usted usuario de este parking.")
+    console.log(nuevoCliente);
     }
-});
 
-preguntar(0);
+//Depositar un coche con cliente
+    var nuevoTicketCliente = user.depositarConCliente(bd);
 
+    if(nuevoTicketCliente == undefined){
+    console.log("Ha ocurrido un error. Esa plaza ya esta ocupada.")
+    }else{
+    console.log("Proceso exitoso. Su ticket:\n")
+    console.log(nuevoTicketCliente);
+    }
 
+//Retirar un coche con cliente
+    var nuevoTicketClienteSalida = user.retirarVehiculoConCliente(bd);
 
+    if(nuevoTicketClienteSalida==undefined){
+        console.log("Ha ocurrido un error. Esa plaza no esta ocupada.")
+    }else{
+        console.log("Proceso exitoso. Su ticket:\n")
+        console.log(nuevoTicketClienteSalida);
+    }
 
+//Depositar un vehiculo sin cliente
+    var tickeEntrada = user.depositarSinCliente(bd);
+    if(tickeEntrada.plazaId==undefined){
+        console.log("Lo sentimos pero no tenemos ese tipo de plaza ahora mismo\n"+
+        "Intentelo mas tarde.")
+    }else{
+        console.log("Su ticket gracias: ");
+        console.log(tickeEntrada);
+    }
 
-var matricula = datosNuevoCliente[0];
-var tipo = bd.listaTipos[0];
-var abonoPin = Math.random(1000, 9999);
-var vehiculo =  new Vehiculo(matricula, tipo);
-var plazaId = 4;
-
-var nuevoCliente = new Cliente (datosNuevoCliente[1],datosNuevoCliente[2],abonoPin,vehiculo,plazaId);
-
-//bd.listaClientes.push(nuevoCliente);
-//console.log(bd.listaClientes.reverse()[0]);
-
-
-
-
+//Retirar un coche sin ser cliente;
+    var ticketSalida = user.retirarVehiculoSinCliente(bd);
+    console.log("El total de su estancia en el parking es de : "+ ticketSalida.precioFinal+"€");
+    console.log("Su ticket: ");
+    console.log(ticketSalida);
+    console.log("Gracias vuelva pronto.");
